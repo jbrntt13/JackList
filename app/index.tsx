@@ -3,11 +3,11 @@ import ToDo from '@/components/Todo';
 import TodoItem from '@/lib/types/TodoItem';
 import { useState } from 'react';
 import {
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
 } from 'react-native';
 type TodoList = TodoItem[];
 
@@ -29,6 +29,12 @@ export default function HomeScreen() {
   return (
     <ThemedView style={styles.container}>
       <Text>{newtodo}</Text>
+
+      <ScrollView style={styles.scrollbox}>
+        {todolist.map((entry, index) => (
+          <ToDo key={index} id={index} todo={entry} onDelete={deleteTodo} />
+        ))}
+      </ScrollView>
       <TextInput
         style={styles.input}
         // value={newtodo}
@@ -37,17 +43,6 @@ export default function HomeScreen() {
       <TouchableOpacity style={styles.button} onPress={addTodo}>
         <Text>Add to list</Text>
       </TouchableOpacity>
-      {todolist.map((entry, index) => (
-        <View key={index} style={styles.list}>
-          <ToDo key={index} id={index} todo={entry} />
-          <TouchableOpacity
-            style={styles.deletebutton}
-            onPress={() => deleteTodo(index)}
-          >
-            <Text>delete</Text>
-          </TouchableOpacity>
-        </View>
-      ))}
     </ThemedView>
   );
 }
@@ -64,12 +59,11 @@ const styles = StyleSheet.create({
     width: '100%',
     borderColor: 'blue',
   },
-  list: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 4,
+  scrollbox: {
+    paddingVertical: 100,
+    paddingHorizontal: 20,
+    width: '100%',
   },
-
   button: {
     paddingHorizontal: 20,
     paddingVertical: 12,
@@ -78,15 +72,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 8,
     backgroundColor: 'yellow',
-  },
-  deletebutton: {
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 8,
-    minWidth: 90,
-    alignItems: 'center',
-    marginHorizontal: 8,
-    backgroundColor: 'red',
   },
   todolistlook: {
     fontSize: 20,
