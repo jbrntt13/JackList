@@ -1,14 +1,7 @@
 import { ThemedView } from '@/components/ThemedView';
-import ToDo from '@/components/Todo';
 import TodoItem from '@/lib/types/TodoItem';
 import { useState } from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import { StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 type TodoList = TodoItem[];
 
 const mainList: TodoList = [{ title: 'test' }, { title: 'test but better' }];
@@ -30,11 +23,6 @@ export default function HomeScreen() {
     <ThemedView style={styles.container}>
       <Text>{newtodo}</Text>
 
-      <ScrollView style={styles.scrollbox}>
-        {todolist.map((entry, index) => (
-          <ToDo key={index} id={index} todo={entry} onDelete={deleteTodo} />
-        ))}
-      </ScrollView>
       <TextInput
         style={styles.input}
         // value={newtodo}
