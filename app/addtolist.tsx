@@ -1,23 +1,13 @@
 import { ThemedView } from '@/components/ThemedView';
+import { useTodo } from '@/context/TodoContext';
 import TodoItem from '@/lib/types/TodoItem';
-import { useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 type TodoList = TodoItem[];
 
 const mainList: TodoList = [{ title: 'test' }, { title: 'test but better' }];
 
 export default function HomeScreen() {
-  const [todolist, setTodolist] = useState<TodoList>(mainList);
-
-  const [newtodo, setNewtodo] = useState<string>('');
-
-  function addTodo() {
-    setTodolist([...todolist, { title: newtodo }]);
-  }
-
-  function deleteTodo(deleteid: number) {
-    setTodolist(todolist.filter((todolist, id) => id != deleteid));
-  }
+  const { todolist, newtodo, deleteTodo, setNewtodo, addTodo } = useTodo();
 
   return (
     <ThemedView style={styles.container}>

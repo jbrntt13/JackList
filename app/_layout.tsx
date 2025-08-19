@@ -21,7 +21,7 @@ export default function RootLayout() {
     <ThemeProvider value={DefaultTheme}>
       <TodoProvider>
         <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="index" />
         </Stack>
       </TodoProvider>
     </ThemeProvider>

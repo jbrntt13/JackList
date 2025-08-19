@@ -1,53 +1,27 @@
 import { ThemedView } from '@/components/ThemedView';
 import ToDo from '@/components/Todo';
+import { useTodo } from '@/context/TodoContext';
 import TodoItem from '@/lib/types/TodoItem';
 import { Link } from 'expo-router';
-import { useState } from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 type TodoList = TodoItem[];
 
 const mainList: TodoList = [{ title: 'test' }, { title: 'test but better' }];
 
 export default function HomeScreen() {
-  const [todolist, setTodolist] = useState<TodoList>(mainList);
-
-  const [newtodo, setNewtodo] = useState<string>('');
-
-  function addTodo() {
-    setTodolist([...todolist, { title: newtodo }]);
-  }
-
-  function deleteTodo(deleteid: number) {
-    setTodolist(todolist.filter((todolist, id) => id != deleteid));
-  }
-
+  const { todolist, newtodo, deleteTodo, setNewtodo } = useTodo();
+  console.log({ todolist });
   return (
     <ThemedView style={styles.container}>
-      <Text>{newtodo}</Text>
-
       <ScrollView style={styles.scrollbox}>
         {todolist.map((entry, index) => (
           <ToDo key={index} id={index} todo={entry} onDelete={deleteTodo} />
         ))}
       </ScrollView>
-      <TextInput
-        style={styles.input}
-        // value={newtodo}
-        onChangeText={(text) => setNewtodo(text)}
-      />
       <Link href="/addtolist" style={styles.button}>
         Go to Add SCreen
       </Link>
-      <TouchableOpacity style={styles.button}>
-        <Text>Add to list</Text>
-      </TouchableOpacity>
     </ThemedView>
   );
 }
