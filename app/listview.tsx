@@ -1,43 +1,21 @@
 import { ThemedView } from '@/components/ThemedView';
-import ToDoList from '@/components/TodoList';
+import ToDo from '@/components/Todo';
 import { useTodo } from '@/context/TodoContext';
-import TodoList from '@/lib/types/TodoList';
+import { Link } from 'expo-router';
 import { ScrollView, StyleSheet } from 'react-native';
-
-//type TodoList = TodoItem[];
-//type TodoItem = { task: string };
-//type TodoList = { title: string; tasks: TodoItem[] };
-type TodoListList = TodoList[];
-
-export default function HomeScreen() {
-  const {
-    todolist,
-    newtodo,
-    todolistlist,
-    newlistlist,
-    newlistname,
-    deleteTodo,
-    setNewtodo,
-    addTodo,
-  } = useTodo();
+export default function listview() {
+  const { todolist, newtodo, deleteTodo, setNewtodo } = useTodo();
   console.log({ todolist });
   return (
     <ThemedView style={styles.container}>
       <ScrollView style={styles.scrollbox}>
-        {todolistlist.map((entry, index) => (
-          <ToDoList
-            key={index}
-            id={entry.id}
-            todoList={entry.tasks}
-            title={entry.title}
-            onDelete={deleteTodo}
-          />
+        {todolist.map((entry, index) => (
+          <ToDo key={index} id={index} todo={entry} onDelete={deleteTodo} />
         ))}
       </ScrollView>
-      {/* I just haven't really checked or tried to add a new list to the master list */}
-      {/* <Link href="/addtolist" style={styles.button}>
-        Go to Add Screen
-      </Link> */}
+      <Link href="/addtolist" style={styles.button}>
+        Go to Add SCreen
+      </Link>
     </ThemedView>
   );
 }

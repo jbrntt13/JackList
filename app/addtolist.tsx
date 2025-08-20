@@ -4,7 +4,7 @@ import TodoItem from '@/lib/types/TodoItem';
 import { StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 type TodoList = TodoItem[];
 
-const mainList: TodoList = [{ title: 'test' }, { title: 'test but better' }];
+//const mainList: TodoList = [{ title: 'test' }, { title: 'test but better' }];
 
 export default function HomeScreen() {
   const { todolist, newtodo, deleteTodo, setNewtodo, addTodo } = useTodo();

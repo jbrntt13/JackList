@@ -10,7 +10,7 @@ export default function ToDo({ todo, id, onDelete }: IProps) {
   //return <Text style={styles.todolistlook}>{todo.title}</Text>;
   return (
     <View style={styles.list}>
-      <Text style={styles.todolistlook}>{todo.title}</Text>
+      <Text style={styles.todolistlook}>{todo.task}</Text>
       <TouchableOpacity
         style={styles.deletebutton}
         onPress={() => onDelete(id)}

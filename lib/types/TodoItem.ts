@@ -1,5 +1,5 @@
 interface TodoItem {
-  title: string;
+  task: string;
 }
 
 export default TodoItem;
