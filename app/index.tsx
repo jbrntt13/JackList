@@ -9,26 +9,16 @@ import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 type TodoListList = TodoList[];
 
 export default function HomeScreen() {
-  const {
-    todolist,
-    newtodo,
-    todolistlist,
-    newlistlist,
-    newlistname,
-    deleteTodo,
-    setNewtodo,
-    addTodo,
-  } = useTodo();
-  console.log({ todolist });
+  const { lists } = useTodo();
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollbox}>
-        {todolistlist.map((entry, index) => (
+        {lists.map((list, index) => (
           <ToDoList
             key={index}
-            id={entry.id}
-            todoList={entry.tasks}
-            title={entry.title}
+            id={list.id}
+            tasks={list.tasks}
+            title={list.title}
             onDelete={deleteTodo}
           />
         ))}

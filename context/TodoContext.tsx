@@ -1,86 +1,52 @@
-import Tasks from '@/lib/types/Tasks';
-import TodoItem from '@/lib/types/TodoItem';
-import TodoList from '@/lib/types/TodoList';
+import List from '@/lib/types/List';
 import { createContext, ReactNode, useContext, useState } from 'react';
 
-interface List {
-  title: string;
-  id: number;
-  tasks: Tasks;
-}
-
 type TodoContextType = {
-  // We'll add the actual context values and functions later
-  todolist: TodoItem[];
-  inventory: TodoList[];
-  newtodo: string;
-  newinventory: TodoList[];
-  newlistname: string;
-  deleteTodo: (deleteid: number) => void;
-  setNewtodo: React.Dispatch<React.SetStateAction<string>>;
-  addTodo: () => void;
+  newTodo: string;
+  lists: List[];
+  newListName: string;
+  setNewTodo: React.Dispatch<React.SetStateAction<string>>;
+  setNewListName: React.Dispatch<React.SetStateAction<string>>;
 };
-type TodoListList = TodoList[];
+
 const TodoContext = createContext<TodoContextType | undefined>(undefined);
-const subList: TodoItem[] = [{ task: 'testxxx' }, { task: 'test but better' }];
-const mainList: TodoListList = [
+
+const mainList: List[] = [
   {
     title: 'Jacks pokemon to catch',
     id: 100,
-    tasks: [{ task: 'Porygon' }, { task: 'Gimmighoul' }, { task: 'Zubat' }],
+    tasks: [
+      { content: 'Porygon' },
+      { content: 'Gimmighoul' },
+      { content: 'Zubat' },
+    ],
   },
   {
     title: 'Kayleighs pokemon to catch',
     id: 101,
-    tasks: [{ task: 'Remordaid' }, { task: 'Larvesta' }, { task: 'Furret' }],
+    tasks: [
+      { content: 'Remordaid' },
+      { content: 'Larvesta' },
+      { content: 'Furret' },
+    ],
   },
 ];
+
 type TodoProviderProps = {
   children: ReactNode;
 };
 
 export function TodoProvider({ children }: TodoProviderProps) {
-  // We'll add the state and functions later
-  const [newtodo, setNewtodo] = useState<string>('');
-  const [todolist, setTodolist] = useState<TodoItem[]>(subList);
-  const [todolistlist, setTodolistlist] = useState<TodoListList>(mainList);
-  const [newlistlist, setnewlistlist] = useState<TodoList[]>();
-  const [newlistname, setnewlistname] = useState<string>('');
-
-  function addTodo() {
-    setTodolist([...todolist, { task: newtodo }]);
-  }
-
-  function addNewMainList() {
-    // setTodolistlist([...todolistlist, { task: newtodo }]);
-
-    setTodolistlist([
-      ...todolistlist,
-      {
-        title: newlistname,
-        tasks: newlistlist,
-        id: Math.floor(Math.random() * 900) + 100,
-      },
-    ]);
-  }
-
-  function deleteTodo(deleteid: number) {
-    setTodolist(todolist.filter((todolist, id) => id != deleteid));
-  }
-
-  function deleteList(deleteid: number) {
-    setTodolistlist(todolistlist.filter((todolistlist, id) => id != deleteid));
-  }
+  // tasks
+  const [newTodo, setNewTodo] = useState<string>('');
+  // lists
+  const [lists, setLists] = useState<List[]>(mainList);
+  const [newListName, setNewListName] = useState<string>('');
 
   const value = {
-    todolist,
-    newtodo,
-    todolistlist,
-    newlistlist,
-    newlistname,
-    deleteTodo,
-    setNewtodo,
-    addTodo,
+    newTodo,
+    lists,
+    newListName,
   };
 
   return (
