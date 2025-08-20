@@ -23,8 +23,6 @@ export default function listview() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 
   input: {
@@ -33,8 +31,6 @@ const styles = StyleSheet.create({
     borderColor: 'blue',
   },
   scrollbox: {
-    paddingVertical: 100,
-    paddingHorizontal: 20,
     width: '100%',
   },
   button: {

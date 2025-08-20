@@ -1,8 +1,7 @@
-import { ThemedView } from '@/components/ThemedView';
 import ToDoList from '@/components/TodoList';
 import { useTodo } from '@/context/TodoContext';
 import TodoList from '@/lib/types/TodoList';
-import { ScrollView, StyleSheet } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 
 //type TodoList = TodoItem[];
 //type TodoItem = { task: string };
@@ -22,7 +21,7 @@ export default function HomeScreen() {
   } = useTodo();
   console.log({ todolist });
   return (
-    <ThemedView style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollbox}>
         {todolistlist.map((entry, index) => (
           <ToDoList
@@ -38,15 +37,13 @@ export default function HomeScreen() {
       {/* <Link href="/addtolist" style={styles.button}>
         Go to Add Screen
       </Link> */}
-    </ThemedView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 
   input: {
@@ -55,8 +52,6 @@ const styles = StyleSheet.create({
     borderColor: 'blue',
   },
   scrollbox: {
-    paddingVertical: 100,
-    paddingHorizontal: 20,
     width: '100%',
   },
   button: {

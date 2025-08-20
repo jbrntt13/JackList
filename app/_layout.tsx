@@ -20,9 +20,7 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={DefaultTheme}>
       <TodoProvider>
-        <Stack>
-          <Stack.Screen name="index" />
-        </Stack>
+        <Stack />
       </TodoProvider>
     </ThemeProvider>
   );

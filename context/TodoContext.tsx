@@ -5,9 +5,9 @@ import { createContext, ReactNode, useContext, useState } from 'react';
 type TodoContextType = {
   // We'll add the actual context values and functions later
   todolist: TodoItem[];
-  todolistlist: TodoList[];
+  inventory: TodoList[];
   newtodo: string;
-  newlistlist: TodoList[];
+  newinventory: TodoList[];
   newlistname: string;
   deleteTodo: (deleteid: number) => void;
   setNewtodo: React.Dispatch<React.SetStateAction<string>>;
@@ -37,7 +37,7 @@ export function TodoProvider({ children }: TodoProviderProps) {
   const [newtodo, setNewtodo] = useState<string>('');
   const [todolist, setTodolist] = useState<TodoItem[]>(subList);
   const [todolistlist, setTodolistlist] = useState<TodoListList>(mainList);
-  const [newlistlist, setnewlistlist] = useState<TodoItem[]>(subList);
+  const [newlistlist, setnewlistlist] = useState<TodoList[]>();
   const [newlistname, setnewlistname] = useState<string>('');
 
   function addTodo() {

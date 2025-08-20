@@ -1,14 +1,15 @@
 import { ThemedView } from '@/components/ThemedView';
 import ToDo from '@/components/Todo';
 import { useTodo } from '@/context/TodoContext';
-import { Link, useLocalSearchParams } from 'expo-router';
-import { ScrollView, StyleSheet } from 'react-native';
+import { Link, useLocalSearchParams, useNavigation } from 'expo-router';
+import { useEffect } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 
 import { Text } from 'react-native';
 export default function Details() {
   const { listid } = useLocalSearchParams<{ listid: string }>();
   const { todolistlist, deleteTodo } = useTodo();
-
+  const navigation = useNavigation();
   const convertedid = listid ? parseInt(listid, 10) : undefined;
   const list =
     convertedid !== undefined
@@ -25,25 +26,31 @@ export default function Details() {
     return <Text>No list found for id: {listid}</Text>;
   }
 
+  useEffect(() => {
+    navigation.setOptions({
+      title: list.title,
+    });
+  }, [navigation]);
+
   return (
-    <ThemedView style={styles.container}>
-      <ScrollView style={styles.scrollbox}>
-        {list.tasks.map((entry, index) => (
-          <ToDo key={index} id={index} todo={entry} onDelete={deleteTodo} />
-        ))}
-      </ScrollView>
-      <Link href="/addtolist" style={styles.button}>
-        Go to Add SCreen
-      </Link>
-    </ThemedView>
+    <SafeAreaView style={styles.container}>
+      <ThemedView style={styles.container}>
+        <ScrollView style={styles.scrollbox}>
+          {list.tasks.map((entry, index) => (
+            <ToDo key={index} id={index} todo={entry} onDelete={deleteTodo} />
+          ))}
+        </ScrollView>
+        <Link href="/addtolist" style={styles.button}>
+          Go to Add Screen
+        </Link>
+      </ThemedView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 
   input: {
@@ -52,8 +59,6 @@ const styles = StyleSheet.create({
     borderColor: 'blue',
   },
   scrollbox: {
-    paddingVertical: 100,
-    paddingHorizontal: 20,
     width: '100%',
   },
   button: {
