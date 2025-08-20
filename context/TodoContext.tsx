@@ -1,6 +1,13 @@
+import Tasks from '@/lib/types/Tasks';
 import TodoItem from '@/lib/types/TodoItem';
 import TodoList from '@/lib/types/TodoList';
 import { createContext, ReactNode, useContext, useState } from 'react';
+
+interface List {
+  title: string;
+  id: number;
+  tasks: Tasks;
+}
 
 type TodoContextType = {
   // We'll add the actual context values and functions later
