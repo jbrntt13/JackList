@@ -2,7 +2,7 @@ import Tasks from './Tasks';
 
 interface List {
   title: string;
-  id: number;
+  id: string;
   tasks: Tasks;
 }
 

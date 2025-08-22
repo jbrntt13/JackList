@@ -1,16 +1,16 @@
-import TodoItem from '@/lib/types/TodoItem';
+import Task from '@/lib/types/Task';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 interface IProps {
-  todo: TodoItem;
-  id: number;
-  onDelete: (id: number) => void;
+  todo: Task;
+  id: string;
+  onDelete: (id: string) => void;
 }
 
 export default function ToDo({ todo, id, onDelete }: IProps) {
   //return <Text style={styles.todolistlook}>{todo.title}</Text>;
   return (
     <View style={styles.list}>
-      <Text style={styles.todolistlook}>{todo.task}</Text>
+      <Text style={styles.todolistlook}>{todo.content}</Text>
       <TouchableOpacity
         style={styles.deletebutton}
         onPress={() => onDelete(id)}

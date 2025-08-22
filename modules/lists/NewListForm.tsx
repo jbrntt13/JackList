@@ -1,30 +1,39 @@
-import { ThemedView } from '@/components/ThemedView';
 import { useTodo } from '@/context/TodoContext';
-import TodoItem from '@/lib/types/TodoItem';
-import { StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
-type TodoList = TodoItem[];
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
-//const mainList: TodoList = [{ title: 'test' }, { title: 'test but better' }];
+interface IProps {
+  onSubmit: () => void;
+}
 
-export default function HomeScreen() {
-  const { todolist, newtodo, deleteTodo, setNewtodo, addTodo } = useTodo();
+export default function NewListForm({ onSubmit }: IProps) {
+  const { newListName, setNewListName, addNewList } = useTodo();
+
+  function completeForm() {
+    //make new list
+    addNewList();
+    //close the modal
+    onSubmit();
+  }
 
   return (
-    <ThemedView style={styles.container}>
-      <Text>{newtodo}</Text>
-
+    <View>
       <TextInput
         style={styles.input}
         // value={newtodo}
-        onChangeText={(text) => setNewtodo(text)}
+        onChangeText={(text) => setNewListName(text)}
       />
-      <TouchableOpacity style={styles.button} onPress={addTodo}>
+      <TouchableOpacity style={styles.button} onPress={completeForm}>
         <Text>Add to list</Text>
       </TouchableOpacity>
-    </ThemedView>
+    </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

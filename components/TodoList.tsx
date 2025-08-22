@@ -1,14 +1,15 @@
-import TodoItem from '@/lib/types/TodoItem';
+// import TodoItem from '@/lib/types/TodoItem';
+import Tasks from '@/lib/types/Tasks';
 import { Link } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
 interface IProps {
-  todoList: TodoItem[];
+  tasks: Tasks;
   title: string;
-  id: number;
+  id: string;
   onDelete: (id: number) => void;
 }
 
-export default function ToDoList({ todoList, id, title, onDelete }: IProps) {
+export default function ToDoList({ tasks, id, title, onDelete }: IProps) {
   //return <Text style={styles.todolistlook}>{todo.title}</Text>;
   return (
     <View style={styles.list}>

@@ -3,22 +3,14 @@ import ToDo from '@/components/Todo';
 import { useTodo } from '@/context/TodoContext';
 import { Link, useLocalSearchParams, useNavigation } from 'expo-router';
 import { useEffect } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text } from 'react-native';
 
-import { Text } from 'react-native';
 export default function Details() {
   const { listid } = useLocalSearchParams<{ listid: string }>();
-  const { todolistlist, deleteTodo } = useTodo();
+  const { lists, deleteTask } = useTodo();
   const navigation = useNavigation();
-  const convertedid = listid ? parseInt(listid, 10) : undefined;
-  const list =
-    convertedid !== undefined
-      ? todolistlist.find((l) => l.id === convertedid)
-      : undefined;
-  console.log('this is listid: ' + listid);
-  console.log('this is our list of lists: ' + todolistlist);
-  console.log('this is list: ' + list);
-  console.log('this is convertedid: ' + convertedid);
+  const list = lists.find((l) => l.id === listid);
+
   if (!listid) {
     return <Text>Missing list id.</Text>;
   }
@@ -36,11 +28,17 @@ export default function Details() {
     <SafeAreaView style={styles.container}>
       <ThemedView style={styles.container}>
         <ScrollView style={styles.scrollbox}>
-          {list.tasks.map((entry, index) => (
-            <ToDo key={index} id={index} todo={entry} onDelete={deleteTodo} />
+          {list.tasks.map((task, index) => (
+            <ToDo key={index} id={task.id} todo={task} onDelete={deleteTask} />
           ))}
         </ScrollView>
-        <Link href="/addtolist" style={styles.button}>
+        <Link
+          href={{
+            pathname: '/details/[listid]/addtolist',
+            params: { listid: String(listid) },
+          }}
+          style={styles.button}
+        >
           Go to Add Screen
         </Link>
       </ThemedView>

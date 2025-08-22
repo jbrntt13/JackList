@@ -1,12 +1,6 @@
 import ToDoList from '@/components/TodoList';
 import { useTodo } from '@/context/TodoContext';
-import TodoList from '@/lib/types/TodoList';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
-
-//type TodoList = TodoItem[];
-//type TodoItem = { task: string };
-//type TodoList = { title: string; tasks: TodoItem[] };
-type TodoListList = TodoList[];
 
 export default function HomeScreen() {
   const { lists } = useTodo();
@@ -19,7 +13,7 @@ export default function HomeScreen() {
             id={list.id}
             tasks={list.tasks}
             title={list.title}
-            onDelete={deleteTodo}
+            onDelete={() => {}}
           />
         ))}
       </ScrollView>
