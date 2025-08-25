@@ -1,42 +1,34 @@
 import ToDoList from '@/components/TodoList';
 import { useTodo } from '@/context/TodoContext';
-import {
-  ImageBackground,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-} from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 
 export default function HomeScreen() {
   const { lists } = useTodo();
+
+  // Create a sorted copy for rendering
+  const sortedLists = [...lists].sort(
+    (b, a) => a.updatedOn.getTime() - b.updatedOn.getTime()
+  );
+
   return (
-    <ImageBackground
-      source={require('../public/img/background.jpg')}
-      style={{ flex: 1 }}
-      imageStyle={{
-        transform: [{ scale: 1.2 }], // Zoom in by 20%
-      }}
-      // imageStyle={{ borderRadius: 8 }} // optional
-    >
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollbox}>
-          {lists.map((list, index) => (
-            <ToDoList
-              key={index}
-              id={list.id}
-              tasks={list.tasks}
-              title={list.title}
-              createdOn={list.createdOn}
-              onDelete={() => {}}
-            />
-          ))}
-        </ScrollView>
-        {/* I just haven't really checked or tried to add a new list to the master list */}
-        {/* <Link href="/addtolist" style={styles.button}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollbox}>
+        {sortedLists.map((list, index) => (
+          <ToDoList
+            key={index}
+            id={list.id}
+            tasks={list.tasks}
+            title={list.title}
+            updatedOn={list.updatedOn}
+            onDelete={() => {}}
+          />
+        ))}
+      </ScrollView>
+      {/* I just haven't really checked or tried to add a new list to the master list */}
+      {/* <Link href="/addtolist" style={styles.button}>
         Go to Add Screen
       </Link> */}
-      </SafeAreaView>
-    </ImageBackground>
+    </SafeAreaView>
   );
 }
 

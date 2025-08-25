@@ -20,7 +20,7 @@ const mainList: List[] = [
   {
     title: 'Jacks pokemon to catch',
     id: '100',
-    createdOn: new Date(Date.now()),
+    updatedOn: new Date(Date.now()),
     tasks: [
       { id: uuid.v4(), content: 'Porygon' },
       { id: uuid.v4(), content: 'Gimmighoul' },
@@ -30,7 +30,7 @@ const mainList: List[] = [
   {
     title: 'Kayleighs pokemon to catch',
     id: '101',
-    createdOn: new Date(Date.now()),
+    updatedOn: new Date(Date.now()),
     tasks: [
       { id: uuid.v4(), content: 'Remordaid' },
       { id: uuid.v4(), content: 'Larvesta' },
@@ -64,7 +64,7 @@ export function TodoProvider({ children }: TodoProviderProps) {
       {
         title: newListName,
         tasks: [],
-        createdOn: new Date(Date.now()),
+        updatedOn: new Date(Date.now()),
         id: uuid.v4(),
       },
     ]);
@@ -83,6 +83,7 @@ export function TodoProvider({ children }: TodoProviderProps) {
           content: newTask,
         },
       ],
+      updatedOn: new Date(Date.now()),
     };
 
     setLists(lists.map((list) => (list.id === id ? updatedList : list)));
@@ -97,6 +98,7 @@ export function TodoProvider({ children }: TodoProviderProps) {
     const newList: List = {
       ...list,
       tasks: list.tasks.filter((task) => task.id !== id),
+      updatedOn: new Date(Date.now()),
     };
 
     const listsWeWantToKeep: List[] = lists.filter(
