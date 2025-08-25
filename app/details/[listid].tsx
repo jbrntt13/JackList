@@ -1,9 +1,14 @@
-import { ThemedView } from '@/components/ThemedView';
 import ToDo from '@/components/Todo';
 import { useTodo } from '@/context/TodoContext';
 import { Link, useLocalSearchParams, useNavigation } from 'expo-router';
 import { useEffect } from 'react';
-import { SafeAreaView, ScrollView, StyleSheet, Text } from 'react-native';
+import {
+  ImageBackground,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+} from 'react-native';
 
 export default function Details() {
   const { listid } = useLocalSearchParams<{ listid: string }>();
@@ -25,8 +30,15 @@ export default function Details() {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ThemedView style={styles.container}>
+    <ImageBackground
+      source={require('../../public/img/background.jpg')}
+      style={{ flex: 1 }}
+      imageStyle={{
+        transform: [{ scale: 1.5 }], // Zoom in by 20%
+      }}
+      // imageStyle={{ borderRadius: 8 }} // optional
+    >
+      <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollbox}>
           {list.tasks.map((task, index) => (
             <ToDo key={index} id={task.id} todo={task} onDelete={deleteTask} />
@@ -41,8 +53,8 @@ export default function Details() {
         >
           Go to Add Screen
         </Link>
-      </ThemedView>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
