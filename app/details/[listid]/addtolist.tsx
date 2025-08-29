@@ -1,8 +1,8 @@
-import { ThemedView } from '@/components/ThemedView';
 import { useTodo } from '@/context/TodoContext';
 import TodoItem from '@/lib/types/Task';
+import { Button, Input } from '@ui-kitten/components';
 import { useLocalSearchParams } from 'expo-router';
-import { StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 type TodoList = TodoItem[];
 
 //const mainList: TodoList = [{ title: 'test' }, { title: 'test but better' }];
@@ -21,27 +21,20 @@ export default function HomeScreen() {
   const { listid } = useLocalSearchParams<{ listid: string }>();
 
   return (
-    <ThemedView style={styles.container}>
-      <Text>{newTask}</Text>
-
-      <TextInput
-        style={styles.input}
-        // value={newtodo}
-        onChangeText={(text) => setNewTask(text)}
-      />
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => addNewTask(listid)}
-      >
+    <View style={styles.container}>
+      <Input onChangeText={(text) => setNewTask(text)} />
+      <Button style={{ width: '100%' }} onPress={() => addNewTask(listid)}>
         <Text>Add to list</Text>
-      </TouchableOpacity>
-    </ThemedView>
+      </Button>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    gap: 8,
+    paddingHorizontal: 80,
     alignItems: 'center',
     justifyContent: 'center',
   },

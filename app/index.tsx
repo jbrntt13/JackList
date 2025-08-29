@@ -3,7 +3,7 @@ import { useTodo } from '@/context/TodoContext';
 import { SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 
 export default function HomeScreen() {
-  const { lists } = useTodo();
+  const { lists, deleteList } = useTodo();
 
   // Create a sorted copy for rendering
   const sortedLists = [...lists].sort(
@@ -20,7 +20,7 @@ export default function HomeScreen() {
             tasks={list.tasks}
             title={list.title}
             updatedOn={list.updatedOn}
-            onDelete={() => {}}
+            onDelete={deleteList}
           />
         ))}
       </ScrollView>

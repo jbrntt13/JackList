@@ -1,11 +1,6 @@
 import { useTodo } from '@/context/TodoContext';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { Button, Divider, Input } from '@ui-kitten/components';
+import { StyleSheet, Text, View } from 'react-native';
 
 interface IProps {
   onSubmit: () => void;
@@ -22,15 +17,19 @@ export default function NewListForm({ onSubmit }: IProps) {
   }
 
   return (
-    <View>
-      <TextInput
-        style={styles.input}
-        // value={newtodo}
-        onChangeText={(text) => setNewListName(text)}
-      />
-      <TouchableOpacity style={styles.button} onPress={completeForm}>
+    <View
+      style={{
+        gap: 8,
+        width: '100%',
+        padding: 10,
+        alignItems: 'center',
+      }}
+    >
+      <Input onChangeText={(text) => setNewListName(text)} />
+      <Divider />
+      <Button style={{ width: '40%' }} onPress={completeForm}>
         <Text>Add to list</Text>
-      </TouchableOpacity>
+      </Button>
     </View>
   );
 }

@@ -1,5 +1,5 @@
 import NewListForm from '@/modules/lists/NewListForm';
-import Entypo from '@expo/vector-icons/Entypo';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import {
   BottomSheetBackdrop,
   BottomSheetModal,
@@ -36,7 +36,7 @@ export default function AddListButton() {
   return (
     <>
       <TouchableOpacity onPress={handlePresentModalPress}>
-        <Entypo name="google-" size={24} color="black" />
+        <MaterialIcons name="playlist-add" size={24} color="black" />
       </TouchableOpacity>
       <BottomSheetModal
         ref={bottomSheetModalRef}

@@ -1,8 +1,10 @@
 import AddListButton from '@/components/HeaderButtons/AddListButton';
 import { TodoProvider } from '@/context/TodoContext';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import * as eva from '@eva-design/eva';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { ApplicationProvider } from '@ui-kitten/components';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -21,23 +23,25 @@ export default function RootLayout() {
   }
 
   return (
-    <GestureHandlerRootView>
-      <TodoProvider>
-        <BottomSheetModalProvider>
-          <ThemeProvider value={DefaultTheme}>
-            <Stack>
-              <Stack.Screen
-                name="index"
-                options={{
-                  headerRight: () => {
-                    return <AddListButton />;
-                  },
-                }}
-              />
-            </Stack>
-          </ThemeProvider>
-        </BottomSheetModalProvider>
-      </TodoProvider>
-    </GestureHandlerRootView>
+    <ApplicationProvider {...eva} theme={eva.light}>
+      <GestureHandlerRootView>
+        <TodoProvider>
+          <BottomSheetModalProvider>
+            <ThemeProvider value={DefaultTheme}>
+              <Stack>
+                <Stack.Screen
+                  name="index"
+                  options={{
+                    headerRight: () => {
+                      return <AddListButton />;
+                    },
+                  }}
+                />
+              </Stack>
+            </ThemeProvider>
+          </BottomSheetModalProvider>
+        </TodoProvider>
+      </GestureHandlerRootView>
+    </ApplicationProvider>
   );
 }

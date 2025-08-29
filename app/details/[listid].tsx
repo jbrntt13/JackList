@@ -1,14 +1,9 @@
 import ToDo from '@/components/Todo';
+import Button from '@/components/ui/Button';
 import { useTodo } from '@/context/TodoContext';
-import { Link, useLocalSearchParams, useNavigation } from 'expo-router';
+import { useLocalSearchParams, useNavigation } from 'expo-router';
 import { useEffect } from 'react';
-import {
-  ImageBackground,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-} from 'react-native';
+import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export default function Details() {
   const { listid } = useLocalSearchParams<{ listid: string }>();
@@ -30,31 +25,23 @@ export default function Details() {
   }, [navigation]);
 
   return (
-    <ImageBackground
-      source={require('../../public/img/background.jpg')}
-      style={{ flex: 1 }}
-      imageStyle={{
-        transform: [{ scale: 1.5 }], // Zoom in by 20%
-      }}
-      // imageStyle={{ borderRadius: 8 }} // optional
-    >
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollbox}>
-          {list.tasks.map((task, index) => (
-            <ToDo key={index} id={task.id} todo={task} onDelete={deleteTask} />
-          ))}
-        </ScrollView>
-        <Link
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollbox}>
+        {list.tasks.map((task, index) => (
+          <ToDo key={index} id={task.id} todo={task} onDelete={deleteTask} />
+        ))}
+      </ScrollView>
+      <View style={{ paddingHorizontal: 80 }}>
+        <Button
           href={{
-            pathname: '/details/[listid]/addtolist',
+            pathname: 'details/[listid]/addtolist',
             params: { listid: String(listid) },
           }}
-          style={styles.button}
         >
-          Go to Add Screen
-        </Link>
-      </SafeAreaView>
-    </ImageBackground>
+          Add Task To List
+        </Button>
+      </View>
+    </SafeAreaView>
   );
 }
 

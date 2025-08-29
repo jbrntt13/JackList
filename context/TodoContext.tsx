@@ -12,6 +12,7 @@ type TodoContextType = {
   addNewList: () => void;
   addNewTask: (id: string) => void;
   deleteTask: (id: string) => void;
+  deleteList: (id: string) => void;
 };
 
 const TodoContext = createContext<TodoContextType | undefined>(undefined);
@@ -110,6 +111,14 @@ export function TodoProvider({ children }: TodoProviderProps) {
     console.log('it connects');
   }
 
+  function deleteList(id: List['id']) {
+    const list = lists.find((list) => list.id === id);
+    if (!list) return null;
+
+    const listsWeWantToKeep: List[] = lists.filter((list) => list.id !== id);
+    setLists(listsWeWantToKeep);
+  }
+
   const value: TodoContextType = {
     newTask,
     lists,
@@ -119,6 +128,7 @@ export function TodoProvider({ children }: TodoProviderProps) {
     deleteTask,
     addNewList,
     addNewTask,
+    deleteList,
   };
 
   return (
